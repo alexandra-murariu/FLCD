@@ -1,0 +1,31 @@
+1. Alphabet
+	a. [A-Za-z]
+	b. Underline (‘_’)
+	c. [0-9]
+
+2. Lexic
+a. special symbols
+	i. operators: + - * / % = < <= > >= != not and or xor []
+	ii. separators: {} () . , : ;  # ?
+	iii. reserved words: let, integer, string, bool, char, check, elsecheck, else, 
+	     while, write, read, for
+b. identifiers = a sequence of letters and digits, such that the first character is a 
+   letter, the rules are:
+	i. letter = “a” | “b” | … | “z” | “A” | “B” | … | “Z”
+	ii. nonzero = “1” | “2” | … | “9”
+	iii. digit = “0” | “1” | … | “9”
+	iv. identifier = letter {(letter | digit | ”_”)} | “_”
+c. constants
+	i. integer
+	integer = “0” | [(“+” | “-“)] nonzero {digit}
+	ii. char
+		1. special = “_” | “;” | … (a.s.o.)
+		2. charpart = letter | digit | special
+		3. char = “’”charpart”’”
+	iii. string
+	string = ‘”’{charpart}’”’
+	iv. bool
+	bool = "True" | "False"
+
+constant = integer | char | string | bool
+
