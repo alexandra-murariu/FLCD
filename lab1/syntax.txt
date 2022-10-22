@@ -1,11 +1,10 @@
 program = “#”cmpdstmt “?”
-decllist = declaration | declaration “;” decllist
 declaration = ”let” IDENTIFIER “:” type
 simpletype = “bool” | “char” | “integer"
 arraytype = simpletype “[“ integer “]”
 type = simpletype | arraytype | "string"
 cmpdstmt = “{“ {stmt} “}”
-stmt  = (assignment | decllist | forstmt | checkstmt | whilestmt | readstmt | writestmt) “;”
+stmt  = (assignment | declaration | forstmt | checkstmt | whilestmt | readstmt | writestmt) “;”
 assignment = IDENTIFIER “=” expr | index "=" expr
 expr = expr (“+”|”-“) term | term 
 term = term (“*” | “/” | “%”) factor | factor
