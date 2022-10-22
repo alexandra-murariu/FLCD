@@ -1,0 +1,22 @@
+program = “#”cmpdstmt “?”
+decllist = declaration | declaration “;” decllist
+declaration = ”let” IDENTIFIER “:” type
+simpletype = “bool” | “char” | “integer"
+arraytype = simpletype “[“ integer “]”
+type = simpletype | arraytype | "string"
+cmpdstmt = “{“ {stmt} “}”
+stmt  = (assignment | decllist | forstmt | checkstmt | whilestmt | readstmt | writestmt) “;”
+assignment = IDENTIFIER “=” expr | index "=" expr
+expr = expr (“+”|”-“) term | term 
+term = term (“*” | “/” | “^” | “%”) factor | factor
+factor = “(“ expression “)” | identifier | integer | index | constant
+cond = expr relation expr
+condstmt = cond | cond logical cond
+relation = “<” | “<=” | “>” | “>=” | “!=” | “==”
+forstmt = “for(” assignment “;” condstmt “;” assignment “)” cmpdstmt  
+checkstmt = “check(” condstmt ")" cmpdstmt {“elsecheck(” condstmt ")" cmpdstmt} [“else” cmpdstmt]
+whilestmt  = “while(” condstmt ")" cmpdstmt
+readstmt = “read(“ identifier “)”
+writestmt = “write(“ expr “)”
+index = identifier “[“ integer “]”
+logical = “and” | “or” | “xor” | “not”
