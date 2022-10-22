@@ -8,7 +8,7 @@ cmpdstmt = “{“ {stmt} “}”
 stmt  = (assignment | decllist | forstmt | checkstmt | whilestmt | readstmt | writestmt) “;”
 assignment = IDENTIFIER “=” expr | index "=" expr
 expr = expr (“+”|”-“) term | term 
-term = term (“*” | “/” | “^” | “%”) factor | factor
+term = term (“*” | “/” | “%”) factor | factor
 factor = “(“ expression “)” | identifier | integer | index | constant
 cond = expr relation expr
 condstmt = cond | cond logical cond

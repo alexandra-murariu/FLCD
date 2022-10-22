@@ -5,8 +5,8 @@
 
 2. Lexic
 a. special symbols
-	i. operators: + - * / % ^ = < <= > >= != not and or xor
-	ii. separators: {} [] () . , : ;  # ?
+	i. operators: + - * / % = < <= > >= != not and or xor []
+	ii. separators: {} () . , : ;  # ?
 	iii. reserved words: let, integer, string, bool, char, check, elsecheck, else, 
 	     while, write, read, for
 b. identifiers = a sequence of letters and digits, such that the first character is a 
