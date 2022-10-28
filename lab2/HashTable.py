@@ -28,12 +28,12 @@ class HashTable:
             return self.get(value)[0].key, self.get(value)[1]
         if node is None:
             self._containers[idx] = Node(key, value)
-            return key
+            return idx, key
         else:
             while node.next is not None:
                 node = node.next
             node.next = Node(key, value)
-            return key
+            return idx, key
 
     def get(self, value):
         idx = self.hash(value)
