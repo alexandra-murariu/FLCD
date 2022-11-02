@@ -1,0 +1,16 @@
+#
+{
+let n: integer;
+let x: integer;
+read(n);
+let s: integer;
+i = "aaa";
+s = 0;
+while(i <= n) {
+read(x);
+s = s + x;
+i = i + 1;
+}
+write(s);
+}
+?

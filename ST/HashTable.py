@@ -25,15 +25,15 @@ class HashTable:
         idx = self.hash(value)
         node = self._containers[idx]
         if self.get(value) is not None:
-            return self.get(value)[0].key, self.get(value)[1]
+            return self.get(value), idx
         if node is None:
             self._containers[idx] = Node(key, value)
-            return idx, key
+            return key, idx
         else:
             while node.next is not None:
                 node = node.next
             node.next = Node(key, value)
-            return idx, key
+            return key, idx
 
     def get(self, value):
         idx = self.hash(value)
@@ -43,7 +43,7 @@ class HashTable:
         if node is None:
             return None
         else:
-            return node, idx
+            return node.key
 
     def __str__(self):
         hash_table_string = ""
