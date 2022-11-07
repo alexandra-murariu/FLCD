@@ -24,11 +24,11 @@ class Scanner:
             self.tokens = f.read().split()
 
     def scan(self):
-        lines = []
+        words = []
         with open(self.filename, "r") as f:
             for line in f:
-                lines.append(line.split())
-        for parts in lines:
+                words.append(line.split())
+        for parts in words:
             for part in parts:
                 elements = self.find_tokens(part)
                 for elem in elements:
@@ -41,7 +41,7 @@ class Scanner:
                         self._st.add(elem)
                         self._pif.append(('constant', self._st.find(elem)[0].key))
                     else:
-                        raise ValueError('Lexical Error: line ' + str(lines.index(parts) + 1) + ' at token ' + elem)
+                        raise ValueError('Lexical Error: line ' + str(words.index(parts) + 1) + ' at token ' + elem)
 
         # print(self.tokens)
         # print(self._pif)
@@ -56,7 +56,7 @@ class Scanner:
 
     def find_tokens(self, string):
         line_data = re.split('("[^_a-zA-Z0-9\"\']")|([^_a-zA-Z0-9\"\'])', string)
-        print(str(string) + ":" + str(line_data))
+        #print(str(string) + ":" + str(line_data))
         elements = [el for el in line_data if el is not None and el != '' and el != ' ']
         for i in range(len(elements) - 1):
             if elements[i] == "=" and elements[i + 1] == "=":
@@ -71,13 +71,19 @@ class Scanner:
             elif elements[i] == "!" and elements[i + 1] == "=":
                 elements[i] += elements[i + 1]
                 del elements[i + 1]
+            elif elements[i] == "-" and self.is_constant(elements[i+1]):
+                elements[i] += elements[i + 1]
+                del elements[i + 1]
+            elif elements[i] == "+" and self.is_constant(elements[i+1]):
+                elements[i] += elements[i + 1]
+                del elements[i + 1]
         return elements
 
     def is_constant(self, elem):
         if (
                 re.match('^\"[a-zA-Z0-9-_ ]+\"$', elem) is not None) or (  # string
                 re.match('^\'[a-zA-Z0-9\-_ ]\'$', elem) is not None) or (  # char
-                re.match('^[1-9][0-9]*$|^0$', elem) is not None) or (  # number
+                re.match('^(\+|-)?[1-9][0-9]*$|^0$', elem) is not None) or (  # number
                 re.match('^true|false$', elem) is not None):  # bool
             return True
         return False
