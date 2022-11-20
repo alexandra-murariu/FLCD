@@ -2,6 +2,7 @@ import re
 
 from tabulate import tabulate
 
+from fa.FiniteAutomata import FiniteAutomata
 from symbol_table.ST import ST
 
 
@@ -13,6 +14,8 @@ class Scanner:
         self._pif = []
         self.tokens = []
         self.read_tokens()
+        self.constant_fa = FiniteAutomata("fa_constant.in")
+        self.identifier_fa = FiniteAutomata("fa_identifier.in")
         try:
             self.scan()
             self.write_to_file()
@@ -34,10 +37,12 @@ class Scanner:
                 for elem in elements:
                     if elem in self.tokens:
                         self._pif.append((elem, -1))
-                    elif self.is_identifier(elem):
+                    #elif self.is_identifier(elem):
+                    elif self.identifier_fa.is_seq_accepted(elem):
                         self._st.add(elem)
                         self._pif.append(('identifier', self._st.find(elem)[0].key))
-                    elif self.is_constant(elem):
+
+                    elif self.constant_fa.is_seq_accepted(elem):
                         self._st.add(elem)
                         self._pif.append(('constant', self._st.find(elem)[0].key))
                     else:
@@ -81,8 +86,8 @@ class Scanner:
 
     def is_constant(self, elem):
         if (
-                re.match('^\"[a-zA-Z0-9-_ ]+\"$', elem) is not None) or (  # string
-                re.match('^\'[a-zA-Z0-9\-_ ]\'$', elem) is not None) or (  # char
+                re.match('^\"[a-zA-Z0-9_]+\"$', elem) is not None) or (  # string
+                re.match('^\'[a-zA-Z0-9_]\'$', elem) is not None) or (  # char
                 re.match('^(\+|-)?[1-9][0-9]*$|^0$', elem) is not None) or (  # number
                 re.match('^true|false$', elem) is not None):  # bool
             return True

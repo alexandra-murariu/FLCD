@@ -1,5 +1,7 @@
 from tabulate import tabulate
 
+from fa import console
+from fa.console import Console
 from scanner import Scanner
 from symbol_table import ST
 
@@ -21,4 +23,6 @@ if __name__ == "__main__":
     # print("#######################")
     # print("Symbol table: ")
     # print(tabulate(st.st_to_string()))
-    s = Scanner.Scanner("program2.txt", "tokens.in")
+    # Scanner.Scanner("program3.txt", "tokens.in")
+    c = Console("DFA.in")
+    c.run()
