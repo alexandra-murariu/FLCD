@@ -2,6 +2,7 @@ from tabulate import tabulate
 
 from fa import console
 from fa.console import Console
+from grammar.console import GrammarConsole
 from scanner import Scanner
 from symbol_table import ST
 
@@ -23,6 +24,6 @@ if __name__ == "__main__":
     # print("#######################")
     # print("Symbol table: ")
     # print(tabulate(st.st_to_string()))
-    # Scanner.Scanner("program3.txt", "tokens.in")
-    c = Console("DFA.in")
+    #Scanner.Scanner("program3.txt", "tokens.in")
+    c = GrammarConsole("g1.txt")
     c.run()

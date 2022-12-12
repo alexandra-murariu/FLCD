@@ -1,0 +1,25 @@
+program, cmpdstmt, declaration, type, identifier, simpletype, arraytype, stmt, assignment, declaration, forstmt, condstmt, checkstmt, whilestmt, readstmt, writestmt, expr, index, term, factor, constant, INTEGER, cond, relation, logical
+#, ?, let, :, bool, char, integer, [, ], string, {, }, ;, =, +, -, *, /, %, not, <, <=, >, >=, !=, ==, for(, ), check(, elsecheck(, else, while(, read(, write(, and, or, xor, (
+program
+program -> # cmpdstmt ?,
+declaration -> let identifier : type,
+simpletype -> bool | char | integer,
+arraytype -> simpletype [ INTEGER ],
+type -> simpletype | arraytype | string,
+cmpdstmt -> cmpdstmt | cmpdstmt { stmt },
+stmt -> assignment ; | declaration ; | forstmt ; | checkstmt ; | whilestmt ; | readstmt ; | writestmt ;,
+assignment -> identifier = expr | index = expr,
+expr -> expr + term | expr - term | term,
+term -> term * factor | term / factor | term % factor | factor,
+factor -> ( expr ) | identifier | INTEGER | index | constant,
+cond -> expr relation expr,
+condstmt -> cond | cond logical cond | not cond,
+relation -> < | <= | > | >= | != | ==,
+forstmt -> for( assignment ; condstmt ; assignment ) cmpdstmt,
+checkstmt -> check( condstmt ) cmpdstmt { elsecheck( condstmt ) cmpdstmt } | check( condstmt ) cmpdstmt { elsecheck( condstmt ) cmpdstmt } else cmpdstmt,
+whilestmt -> while( condstmt ) cmpdstmt,
+readstmt -> read( identifier ),
+writestmt -> write( expr ),
+index -> identifier [ integer ],
+logical -> and | or | xor
+
