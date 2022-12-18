@@ -6,6 +6,7 @@ class Grammar:
         self.P = {}
         self.S = 'S'
         self.filename = filename
+        self.i = 0
         self.read()
 
     def prod_for_nonterminal(self, nonTerminal):
@@ -19,7 +20,7 @@ class Grammar:
             self.E = [value.strip() for value in file.readline().strip().split(',')]
             self.S = file.readline().strip()
             rules = [value.strip() for value in ''.join([line for line in file]).strip().split(',')]
-            i = 1
+            self.i = 1
 
             for rule in rules:
                 # print(rule)
@@ -29,10 +30,10 @@ class Grammar:
                 # print(rhs)
                 for value in rhs:
                     if lhs in self.P.keys():
-                        self.P[lhs].append((value, i))
+                        self.P[lhs].append((value, self.i))
                     else:
-                        self.P[lhs] = [(value, i)]
-                    i += 1
+                        self.P[lhs] = [(value, self.i)]
+                    self.i += 1
             # print("N: " + str(self.N))
             # print("S: " + str(self.S))
             # print("E: " + str(self.E))
@@ -64,6 +65,13 @@ class Grammar:
                         print("!!!!!ch " + ch)
                         return False
         return True
+
+    def enrich_grammar(self):
+        # add enrichment production
+        self.P['T'] = []
+        self.P['T'].append(('S', self.i))
+        self.N.append('T')
+        self.S = 'T'
 
     def __str__(self):
         return 'N = { ' + ', '.join(self.N) + ' }\n' \
