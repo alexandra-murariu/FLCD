@@ -95,7 +95,12 @@ class Scanner:
 
     def write_to_file(self):
         with open('PIF.out', 'w') as file:
-            file.write(tabulate(self._pif))
+            values = ""
+            indexes = ""
+            for i in self._pif:
+                values += str(i[0]) + " "
+                indexes += str(i[1]) + " "
+            file.write(values + "\n" + indexes)
         with open('ST.out', 'w') as file:
             file.write("hashtable\n")
             file.write(tabulate(self._st.st_to_string()))

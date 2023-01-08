@@ -5,6 +5,7 @@ class Grammar:
         self.E = []
         self.P = {}
         self.S = 'S'
+        self.file_S = 'S'
         self.filename = filename
         self.i = 0
         self.read()
@@ -19,6 +20,7 @@ class Grammar:
             self.N = [value.strip() for value in file.readline().strip().split(',')]
             self.E = [value.strip() for value in file.readline().strip().split(',')]
             self.S = file.readline().strip()
+            self.file_S = self.S
             rules = [value.strip() for value in ''.join([line for line in file]).strip().split(',')]
             self.i = 1
 
@@ -70,7 +72,7 @@ class Grammar:
         # add enrichment production
         self.P['T'] = []
         self.P['T'].append(('S', self.i))
-        self.N.append('T')
+        #self.N.append('T')
         self.S = 'T'
 
     def __str__(self):

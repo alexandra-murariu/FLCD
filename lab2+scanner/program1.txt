@@ -1,7 +1,7 @@
 #
 {
 let a: integer;
-let b: integer;
+let a: integer;
 let c: integer;
 read(a);
 read(b);
