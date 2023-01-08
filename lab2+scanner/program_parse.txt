@@ -1,0 +1,4 @@
+#
+check ( a > i )
+read ( i ) ;
+else write ( a ) ;

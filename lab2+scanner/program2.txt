@@ -6,7 +6,7 @@ read(a);
 read(b);
 while(a != b) {
 check(a>b) {
-a = a - b;
+a = 1;
 }
 else {
 b = b - a;

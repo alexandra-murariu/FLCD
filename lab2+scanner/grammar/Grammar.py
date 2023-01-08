@@ -70,7 +70,7 @@ class Grammar:
         # add enrichment production
         self.P['T'] = []
         self.P['T'].append(('S', self.i))
-        self.N.append('T')
+        #self.N.append('T')
         self.S = 'T'
 
     def __str__(self):
