@@ -81,7 +81,7 @@ class LR:
             for symbol in list_of_symbols:
                 row_for_s[symbol] = 'error'
             for elem in s:
-                if elem == ('T', 'S.') or elem == ('T', 'P.'):
+                if elem == ('T', self.g.file_S + '.'):
                     row_for_s['action'] = 'acc'
             if row_for_s['action'] != 'acc':
                 for i, t in enumerate(set_of_gotos):
@@ -156,6 +156,8 @@ class LR:
                 output_band.insert(0, reduce_prod[1][1])
             else:
                 raise ValueError("Error at state " + work_stack[-1][1] + " with row " + str(table_row))
+
+        raise ValueError("Sequence is not accepted.")
 
     def print_tree(self, node_info, file_name):
         print(tabulate(node_info, headers=["idx", "info", "parent", "right sibling"], tablefmt="fancy_grid"))
