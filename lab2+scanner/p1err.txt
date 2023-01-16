@@ -1,17 +1,15 @@
-#
+#$
 {
 let n: integer;
 let x: integer;
 read(n);
 let s: integer;
-i = false;
-s = -2;
-u = "aaa"
-_t = 'a'
+i = "aaa;
+s = -1;
 while(i <= n) {
 read(x);
 s = s + x;
-i = i + 1;
+3i = i + 1;
 }
 write(s);
 }

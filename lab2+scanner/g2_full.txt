@@ -1,0 +1,24 @@
+P, C, declaration, type, identifier, simpletype, arraytype, stmt, assignment, declaration, forstmt, condstmt, checkstmt, whilestmt, readstmt, writestmt, expr, index, term, factor, constant, INTEGER, cond, relation, logical
+#, ?, let, :, bool, char, integer, [, ], string, {, }, ;, =, +, -, *, /, %, not, <, <=, >, >=, !=, ==, for(, ), check(, elsecheck(, else, while(, read(, write(, and, or, xor, (
+P
+P -> # C ?,
+declaration -> let identifier : type,
+simpletype -> bool | char | integer,
+arraytype -> simpletype [ INTEGER ],
+type -> simpletype | arraytype | string,
+C -> C | C { stmt },
+stmt -> assignment ; | declaration ; | forstmt ; | checkstmt ; | whilestmt ; | readstmt ; | writestmt ;,
+assignment -> identifier = expr | index = expr,
+expr -> expr + term | expr - term | term,
+term -> term * factor | term / factor | term % factor | factor,
+factor -> ( expr ) | identifier | INTEGER | index | constant,
+cond -> expr relation expr,
+condstmt -> cond | cond logical cond | not cond,
+relation -> < | <= | > | >= | != | ==,
+forstmt -> for( assignment ; condstmt ; assignment ) C,
+checkstmt -> check( condstmt ) C { elsecheck( condstmt ) C } | check( condstmt ) C { elsecheck( condstmt ) C } else C,
+whilestmt -> while( condstmt ) C,
+readstmt -> read( identifier ),
+writestmt -> write( expr ),
+index -> identifier [ integer ],
+logical -> and | or | xor
